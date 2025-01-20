@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/MenstrualCycleDetailsPage.dart';
 
 class LifestyleSymptomsPage extends StatefulWidget {
   const LifestyleSymptomsPage({super.key});
@@ -19,11 +20,12 @@ class _LifestyleSymptomsPageState extends State<LifestyleSymptomsPage> {
   ];
 
   List<bool> selectedSymptoms = List.generate(6, (_) => false);
-  String symptomIntensity = 'Moderate';
+  String? symptomIntensity;
   String? selectedDiet;
   String? selectedSleepDuration;
   bool exercises = false;
   double exerciseFrequency = 0;
+  final TextEditingController otherDietController = TextEditingController();
 
   final List<String> intensityOptions = ['Mild', 'Moderate', 'Severe'];
   final List<String> dietOptions = ['Vegan', 'Vegetarian', 'Keto', 'Balanced', 'Other'];
@@ -90,6 +92,7 @@ class _LifestyleSymptomsPageState extends State<LifestyleSymptomsPage> {
                 label: 'Symptom Intensity',
                 field: DropdownButtonFormField<String>(
                   value: symptomIntensity,
+                  hint: const Text('Select Intensity'),
                   items: intensityOptions.map((String value) {
                     return DropdownMenuItem<String>(
                       value: value,
@@ -132,6 +135,19 @@ class _LifestyleSymptomsPageState extends State<LifestyleSymptomsPage> {
                   ),
                 ),
               ),
+              if (selectedDiet == 'Other')
+                _buildFormField(
+                  label: 'Please Specify',
+                  field: TextField(
+                    controller: otherDietController,
+                    decoration: InputDecoration(
+                      hintText: 'Enter your diet/lifestyle',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ),
               _buildFormField(
                 label: 'Typical Sleep Duration',
                 field: DropdownButtonFormField<String>(
@@ -204,6 +220,20 @@ class _LifestyleSymptomsPageState extends State<LifestyleSymptomsPage> {
                       );
                       return;
                     }
+                    if (selectedDiet == 'Other' &&
+                        (otherDietController.text.isEmpty || otherDietController.text.trim().isEmpty)) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(
+                          content: Text('Please specify your diet/lifestyle'),
+                          backgroundColor: Colors.red,
+                        ),
+                      );
+                      return;
+                    }
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const MenstrualCycleDetailsPage()),
+                    );
                     print('Next button pressed');
                   },
                   style: ElevatedButton.styleFrom(
