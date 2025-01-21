@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/screens/BasicInfoPage.dart';
 //import 'screens/home_screen.dart';
+import 'firebase_options.dart';
+
+await Firebase.initializeApp(
+  options: DefaultFirebaseOptions.currentPlatform,
+);
 
 void main() {
   runApp(VnHopeApp());
