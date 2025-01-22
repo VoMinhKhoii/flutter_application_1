@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/screens/HomePage.dart';
 
 class LongTermHealthInsightsPage extends StatefulWidget {
   const LongTermHealthInsightsPage({super.key});
@@ -132,6 +133,12 @@ class _LongTermHealthInsightsPageState
                 alignment: Alignment.center,
                 child: ElevatedButton(
                   onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const HomePage(), // Replace with the next page
+                      ),
+                    );
                     // Perform validations if needed
                     print('Finish button pressed');
                   },

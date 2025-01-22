@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/BasicInfoPage.dart';
+import 'package:flutter_application_1/screens/greeting.dart';
 //import 'screens/home_screen.dart';
 import 'package:firebase_core/firebase_core.dart';
 
@@ -20,7 +20,7 @@ class VnHopeApp extends StatelessWidget {
         primarySwatch: Colors.teal,
       ),
       //home: HomeScreen(), // Default screen
-      home: BasicInfoApp(),
+      home: GreetingPage(),
     );
   }
 }

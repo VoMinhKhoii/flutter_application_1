@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_application_1/screens/BasicInfoPage.dart';
 import 'login.dart'; // Import the LoginPage
 
 class GreetingPage extends StatelessWidget {
@@ -85,7 +86,10 @@ class GreetingPage extends StatelessWidget {
 
               ElevatedButton(
                 onPressed: () {
-                  // Navigate to Sign Up (Placeholder Action)
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => BasicInfoPage()),
+                  );
                   print('Sign Up tapped');
                 },
                 style: ElevatedButton.styleFrom(
