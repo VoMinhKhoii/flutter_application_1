@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_application_1/screens/BasicInfoPage.dart';
-import 'login.dart'; // Import the LoginPage
+import 'package:flutter_application_1/screens/login.dart'; // Import the LoginPage
 
 class GreetingPage extends StatelessWidget {
   const GreetingPage({super.key});
