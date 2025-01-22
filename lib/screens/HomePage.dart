@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'SymptomInfo.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -314,7 +315,7 @@ class _HomePageState extends State<HomePage> {
             crossAxisCount: 7,
             childAspectRatio: 1,
             crossAxisSpacing: 2,
-          mainAxisSpacing: 2,
+            mainAxisSpacing: 2,
           ),
           padding: EdgeInsets.zero,
           itemCount: 42, // 6 weeks * 7 days
@@ -331,52 +332,82 @@ class _HomePageState extends State<HomePage> {
             final isPeriodDay = _periodDays.contains(dayNumber);
             final hasSymptoms = _symptomsLoggedDays.contains(dayNumber);
 
-            return GestureDetector(
-              onTap: () {
-                // Placeholder for date selection
-              },
-              child: Stack(
-                alignment: Alignment.center,
-                children: [
-                  // Period day background
-                  if (isPeriodDay)
-                    Container(
-                      margin: const EdgeInsets.all(2),
-                      decoration: BoxDecoration(
-                        color: Colors.green[100],
-                        borderRadius: BorderRadius.circular(10),
+            return MouseRegion(
+              cursor: SystemMouseCursors.click,  // Changes cursor to pointing hand
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => SymptomsScreen(
+                        selectedDate: DateTime(_selectedYear, _selectedMonth, dayNumber),
                       ),
                     ),
-                  // Today indicator
-                  if (isToday)
-                    Container(
-                      margin: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey),
-                        shape: BoxShape.circle,
-                      ),
-                    ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        dayNumber.toString(),
-                        style: TextStyle(
-                          fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
-                        ),
-                      ),
-                      if (hasSymptoms)
-                        Container(
-                          width: 4,
-                          height: 4,
-                          decoration: const BoxDecoration(
-                            color: Colors.grey,
-                            shape: BoxShape.circle,
+                  ).then((healthData) {
+                    if (healthData != null) {
+                      setState(() {
+                        if (healthData['hasPeriod'] == true) {
+                          _periodDays.add(dayNumber);
+                        }
+                        if (healthData['symptoms'].isNotEmpty) {
+                          _symptomsLoggedDays.add(dayNumber);
+                        }
+                      });
+                    }
+                  });
+                },
+                child: StatefulBuilder(
+                  builder: (context, setState) {
+                    bool isHovered = false;
+
+                    return MouseRegion(
+                      onEnter: (_) => setState(() => isHovered = true),
+                      onExit: (_) => setState(() => isHovered = false),
+                      child: Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          // Period day background
+                          if (isPeriodDay)
+                            Container(
+                              margin: const EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                color: Colors.green[100],
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                          // Today indicator
+                          if (isToday)
+                            Container(
+                              margin: const EdgeInsets.all(4),
+                              decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                                shape: BoxShape.circle,
+                              ),
+                            ),
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Text(
+                                dayNumber.toString(),
+                                style: TextStyle(
+                                  fontWeight: isToday ? FontWeight.bold : FontWeight.normal,
+                                ),
+                              ),
+                              if (hasSymptoms)
+                                Container(
+                                  width: 4,
+                                  height: 4,
+                                  decoration: const BoxDecoration(
+                                    color: Colors.grey,
+                                    shape: BoxShape.circle,
+                                  ),
+                                ),
+                            ],
                           ),
-                        ),
-                    ],
-                  ),
-                ],
+                        ],
+                      ),
+                    );
+                  }
+                ),
               ),
             );
           },
