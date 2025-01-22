@@ -313,7 +313,10 @@ class _HomePageState extends State<HomePage> {
           gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 7,
             childAspectRatio: 1,
+            crossAxisSpacing: 2,
+          mainAxisSpacing: 2,
           ),
+          padding: EdgeInsets.zero,
           itemCount: 42, // 6 weeks * 7 days
           itemBuilder: (context, index) {
             final dayOffset = index - (firstWeekdayOfMonth - 1);
