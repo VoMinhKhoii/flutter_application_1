@@ -54,22 +54,22 @@ class _MenstrualCycleDetailsPageState
   }
 
   void validateAndNavigate() {
-    if (irregularCycles == null ||
-        spottingBetweenPeriods == null ||
-        periodFlow == null ||
-        (diagnosedDisorders &&
-            selectedDisorder == null) || // Check if a disorder is selected
-        (diagnosedDisorders &&
-            selectedDisorder == 'Other' &&
-            otherDisorderController.text.trim().isEmpty)) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Please complete all required fields'),
-          backgroundColor: Colors.red,
-        ),
-      );
-      return;
-    }
+    // if (irregularCycles == null ||
+    //     spottingBetweenPeriods == null ||
+    //     periodFlow == null ||
+    //     (diagnosedDisorders &&
+    //         selectedDisorder == null) || // Check if a disorder is selected
+    //     (diagnosedDisorders &&
+    //         selectedDisorder == 'Other' &&
+    //         otherDisorderController.text.trim().isEmpty)) {
+    //   ScaffoldMessenger.of(context).showSnackBar(
+    //     const SnackBar(
+    //       content: Text('Please complete all required fields'),
+    //       backgroundColor: Colors.red,
+    //     ),
+    //   );
+    //   return;
+    // }
 
     Navigator.push(
       context,

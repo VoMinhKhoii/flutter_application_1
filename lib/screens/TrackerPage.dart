@@ -1,20 +1,59 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/ai_chat/ChatPage.dart';
+import 'package:flutter_application_1/screens/HomePage.dart';
+import 'package:flutter_application_1/screens/TelemedicinePage.dart';
 import 'package:intl/intl.dart';
 import 'SymptomInfo.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class TrackerPage extends StatefulWidget {
+  const TrackerPage({super.key});
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _TrackerPageState createState() => _TrackerPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _TrackerPageState extends State<TrackerPage> {
   final DateTime _currentDate = DateTime.now();
   final List<int> _periodDays = [19, 20, 21, 22, 23, 24]; // Example period days
   final List<int> _symptomsLoggedDays = [5, 6, 7, 8]; // Days with logged symptoms
   int _selectedMonth = DateTime.now().month;
   int _selectedYear = DateTime.now().year;
+    int _selectedIndex = 0;  // Track selected nav item
+
+
+    void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    
+    // Navigate based on index
+    switch(index) {
+      case 0: // Home
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
+        break;
+      case 1: // Tracker
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => TrackerPage()),
+        // );
+        break;
+      case 2: // Medical
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => TelemedicinePage()),
+        );
+        break;
+      case 3: // Profile
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => ProfilePage()),
+        // );
+        // break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,56 +64,38 @@ class _HomePageState extends State<HomePage> {
             children: [
               // Custom app bar with gradient background
               Container(
-                padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).padding.top,
-                  bottom: 0,
-                  left: 20,
-                  right: 20,
-                ),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Colors.green[100]!,
-                      Colors.green[50]!,
-                    ],
-                  ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          'VH',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green[800],
-                          ),
-                        ),
-                        const Spacer(),
-                        IconButton(
-                          icon: const Icon(Icons.notifications_none),
-                          onPressed: () {
-                            // Placeholder for notification button
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      'Hi Y!',
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.green[800],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+  padding: EdgeInsets.only(
+    top: MediaQuery.of(context).padding.top,
+    bottom: 0,
+    left: 20,
+    right: 20,
+  ),
+  decoration: BoxDecoration(
+    color: Colors.green[100]!,
+  ),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const SizedBox(width: 40), // Balance with notification icon width
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.asset('assets/logo.png', height: 52),
+          ),
+          IconButton(
+            icon: const Icon(Icons.notifications_none),
+            onPressed: () {
+              // Placeholder for notification button
+            },
+          ),
+        ],
+      ),
+      const SizedBox(height: 10),
+    ],
+  ),
+),
 
               Expanded(
                 child: SingleChildScrollView(
@@ -139,7 +160,6 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 20),
 
                             // Calendar Grid
                             _buildCalendarGrid(),
@@ -210,79 +230,70 @@ class _HomePageState extends State<HomePage> {
 
         ],
       ),
-      bottomNavigationBar: BottomAppBar(
-        shape: const CircularNotchedRectangle(),
-        notchMargin: 7.0,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-                IconButton(
-      icon: const Icon(Icons.home_filled),
-      iconSize: 28, // Reduced from 32
-      padding: EdgeInsets.zero,
-      constraints: const BoxConstraints(),
-      color: Colors.green[800],
-      onPressed: () {
-        // Placeholder for Home button
-      },
-    ),
-    const SizedBox(height: 2), // Small spacing between icon and text
-    Container(
-      width: 42,
-      padding: const EdgeInsets.symmetric(horizontal: 2),
-      child: Text(
-        'Home',
-        style: TextStyle(
-          color: Colors.green[800],
-          fontSize: 6,
-          height: 1.0,
-        ),
-        textAlign: TextAlign.center,
-        maxLines: 1,
-        overflow: TextOverflow.ellipsis,
-      ),
-    ),
-  ],
-),
-            IconButton(
-              icon: const Icon(Icons.calendar_month_outlined),
-              iconSize: 32,
-              color: Colors.grey,
-              onPressed: () {
-                // Placeholder for Period Tracker button
-              },
-            ),
-            const SizedBox(width: 40), // Space for the notch
-            IconButton(
-              icon: const Icon(Icons.medical_services_outlined),
-              iconSize: 32,
-              color: Colors.grey,
-              onPressed: () {
-                // Placeholder for Telemedicine button
-              },
-            ),
-            IconButton(
-              icon: const Icon(Icons.account_circle),
-              iconSize: 32,
-              color: Colors.grey,
-              onPressed: () {
-                // Placeholder for Profile button
-              },
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
+  floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blue[100],
-        child: const Icon(Icons.chat_outlined, color: Colors.blue),
+        elevation: 4,
+        child: const Icon(Icons.chat_outlined, color: Colors.blue, size: 28),
         onPressed: () {
-          // Placeholder for Floating AI button
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => ChatPage()),
+          );
         },
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        shape: const CircularNotchedRectangle(),
+        notchMargin: 8,
+        color: Colors.white,
+        child: SizedBox(
+          height: 60,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              _buildNavItem(Icons.home_filled, 'Home', Colors.grey!, 0),
+              _buildNavItem(Icons.calendar_month_outlined, 'Tracker', Colors.green[800]!, 1),
+              const SizedBox(width: 40),
+              _buildNavItem(Icons.medical_services_outlined, 'Telemedicine', Colors.grey, 2),
+              _buildNavItem(Icons.account_circle, 'Profile', Colors.grey, 3),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildNavItem(IconData icon, String label, Color color, int index) {
+    return Expanded(
+      child: InkWell(
+        onTap: () => _onItemTapped(index),
+        child: SizedBox(
+          height: 56,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                color: _selectedIndex == index ? Colors.green[800] : color,
+                size: 24,
+              ),
+              const SizedBox(height: 4),
+              Text(
+                label,
+                style: TextStyle(
+                  color: _selectedIndex == index ? Colors.green[800] : color,
+                  fontSize: 11,
+                  height: 1.0,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
+        ),
+      ),
     );
   }
 

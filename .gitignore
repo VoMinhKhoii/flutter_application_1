@@ -11,6 +11,11 @@
 .svn/
 .swiftpm/
 migrate_working_dir/
+<<<<<<< Updated upstream
+.env
+=======
+>>>>>>> Stashed changes
+const.dart
 
 # IntelliJ related
 *.iml

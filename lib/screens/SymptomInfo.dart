@@ -109,7 +109,7 @@ class _SymptomsScreenState extends State<SymptomsScreen> {
                     Row(
                       children: [
                         const Text(
-                          'Flow Intensity',
+                          'Period',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,

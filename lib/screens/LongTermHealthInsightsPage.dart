@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1/screens/Calendar.dart';
+import 'package:flutter_application_1/screens/TrackerPage.dart';
+import 'package:flutter_application_1/screens/HomePage.dart';
 
 class LongTermHealthInsightsPage extends StatefulWidget {
   const LongTermHealthInsightsPage({super.key});
