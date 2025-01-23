@@ -17,6 +17,19 @@ class _SymptomsScreenState extends State<SymptomsScreen> {
   int _flowIntensity = 1;
   final List<String> _selectedSymptoms = [];
   final TextEditingController _notesController = TextEditingController();
+  
+  // New fields for menstrual products
+  final List<bool> _selectedProducts = List.generate(5, (_) => false);
+  final TextEditingController _otherProductController = TextEditingController();
+
+  // List of menstrual products
+  final List<String> _products = [
+    'Pads',
+    'Tampons',
+    'Menstrual Cup',
+    'Panty Liners',
+    'Other'
+  ];
 
   // Predefined lists of symptoms by category with colors
   final Map<String, Map<String, dynamic>> _symptomCategories = {
@@ -57,6 +70,80 @@ class _SymptomsScreenState extends State<SymptomsScreen> {
     },
   };
 
+  // Method to build menstrual products section
+  Widget _buildMenstrualProductsSection() {
+    return Container(
+      margin: const EdgeInsets.fromLTRB(16, 0, 16, 16),
+      decoration: BoxDecoration(
+        color: Colors.purple[50],
+        borderRadius: BorderRadius.circular(20),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.1),
+            spreadRadius: 1,
+            blurRadius: 10,
+          ),
+        ],
+      ),
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              'Menstrual Products',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.purple[800],
+              ),
+            ),
+            const SizedBox(height: 8),
+            Wrap(
+              spacing: 8.0,
+              runSpacing: 8.0,
+              children: List.generate(
+                _products.length,
+                (index) => FilterChip(
+                  label: Text(_products[index]),
+                  selected: _selectedProducts[index],
+                  selectedColor: Colors.purple[100],
+                  checkmarkColor: Colors.purple[800],
+                  onSelected: (bool value) {
+                    setState(() {
+                      _selectedProducts[index] = value;
+                      // Clear other product text if 'Other' is deselected
+                      if (!_selectedProducts[4]) {
+                        _otherProductController.clear();
+                      }
+                    });
+                  },
+                ),
+              ),
+            ),
+            // Conditional text field for 'Other' product
+            if (_selectedProducts[4]) ...[
+              const SizedBox(height: 16),
+              TextField(
+                controller: _otherProductController,
+                decoration: InputDecoration(
+                  labelText: 'Specify Other Product',
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: BorderSide(color: Colors.purple[800]!),
+                  ),
+                ),
+              ),
+            ],
+          ],
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +170,7 @@ class _SymptomsScreenState extends State<SymptomsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Period Section with Gradient (Only keeps "Flow Intensity")
+            // Period Section with Gradient
             Container(
               margin: const EdgeInsets.all(16),
               decoration: BoxDecoration(
@@ -178,6 +265,9 @@ class _SymptomsScreenState extends State<SymptomsScreen> {
                 ),
               ),
             ),
+
+            // Menstrual Products Section
+            _buildMenstrualProductsSection(),
 
             // Symptoms Categories
             ListView.builder(
@@ -309,6 +399,11 @@ class _SymptomsScreenState extends State<SymptomsScreen> {
                     'date': widget.selectedDate,
                     'hasPeriod': _hasPeriod,
                     'flowIntensity': _hasPeriod ? _flowIntensity : null,
+                    'menstrualProducts': _selectedProducts.asMap().entries
+                        .where((entry) => entry.value)
+                        .map((entry) => _products[entry.key])
+                        .toList(),
+                    'otherProduct': _otherProductController.text,
                     'symptoms': _selectedSymptoms,
                     'notes': _notesController.text,
                   };
@@ -333,6 +428,7 @@ class _SymptomsScreenState extends State<SymptomsScreen> {
   @override
   void dispose() {
     _notesController.dispose();
+    _otherProductController.dispose();
     super.dispose();
   }
 }
