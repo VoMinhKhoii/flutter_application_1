@@ -50,7 +50,7 @@ class _TelemedicinePageState extends State<TelemedicinePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Telemedicine',
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black)),
         centerTitle: true,
         backgroundColor: Colors.green[100],
       ),

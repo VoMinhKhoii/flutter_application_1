@@ -49,7 +49,7 @@ class GreetingPage extends StatelessWidget {
                   color: Colors.teal[700],
                 ),
               ),
-              SizedBox(height: 40),
+              SizedBox(height: 80),
               // Buttons
               ElevatedButton(
                 onPressed: () {
