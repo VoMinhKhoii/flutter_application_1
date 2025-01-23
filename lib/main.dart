@@ -3,6 +3,8 @@ import 'package:flutter_application_1/screens/HomePage.dart';
 import 'package:flutter_application_1/screens/TelemedicinePage.dart';
 import 'package:flutter_application_1/screens/TrackerPage.dart';
 import 'package:flutter_application_1/screens/greeting.dart';
+import 'package:flutter_application_1/screens/RewardModule.dart';
+import 'package:flutter_application_1/screens/EducationalModule.dart';
 //import 'screens/home_screen.dart';
 // import 'package:firebase_core/firebase_core.dart';
 

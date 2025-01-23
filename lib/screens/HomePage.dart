@@ -4,6 +4,9 @@ import 'package:flutter_application_1/screens/TrackerPage.dart';
 import 'package:flutter_application_1/screens/TelemedicinePage.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'EducationalContentBox.dart';
+import 'RewardModule.dart';
+import 'EducationalModule.dart';
+
 
 
 class HomePage extends StatefulWidget {
@@ -171,10 +174,82 @@ class _HomePageState extends State<HomePage> {
               ),
             ),
 
+            // Doctor Availability Box
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+              decoration: BoxDecoration(
+                color: Colors.green[50], // Green background
+                borderRadius: BorderRadius.circular(16),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withOpacity(0.05),
+                    blurRadius: 8,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.portrait_rounded, // Changed to portrait icon
+                    color: Colors.green,
+                    size: 32,
+                  ),
+                  SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Doctor Availability',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: Color(0xFF2C3E50),
+                          ),
+                        ),
+                        SizedBox(height: 4),
+                        Text(
+                          'Dr. ABC is available for online consultations today.',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.black54,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            // Reward Module
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: 16),
+                  child: RewardModule(totalTokens: 0), // Adjusted width
+                ),
+
+                SizedBox(height: 16),
+
+                // Educational Module
+                Container(
+                  height: 400,
+                  margin: EdgeInsets.symmetric(horizontal: 16),
+                  child: EducationalModule(
+                    onVideoCompleted: (tokens) {
+                      print('Tokens earned: $tokens');
+                    },
+                  ),
+                ),
+
+                SizedBox(height: 16),
+
                       Spacer(),
                     ],
                   ),
                 ),
+
                 floatingActionButton: FloatingActionButton(
                   backgroundColor: Colors.blue[100],
                   elevation: 4,
