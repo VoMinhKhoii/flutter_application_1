@@ -211,25 +211,25 @@ class _LifestyleSymptomsPageState extends State<LifestyleSymptomsPage> {
                 alignment: Alignment.center,
                 child: ElevatedButton(
                   onPressed: () {
-                    if (selectedDiet == null || selectedSleepDuration == null) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Please complete all fields'),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-                      return;
-                    }
-                    if (selectedDiet == 'Other' &&
-                        (otherDietController.text.isEmpty || otherDietController.text.trim().isEmpty)) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Please specify your diet/lifestyle'),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-                      return;
-                    }
+                    // if (selectedDiet == null || selectedSleepDuration == null) {
+                    //   ScaffoldMessenger.of(context).showSnackBar(
+                    //     const SnackBar(
+                    //       content: Text('Please complete all fields'),
+                    //       backgroundColor: Colors.red,
+                    //     ),
+                    //   );
+                    //   return;
+                    // }
+                    // if (selectedDiet == 'Other' &&
+                    //     (otherDietController.text.isEmpty || otherDietController.text.trim().isEmpty)) {
+                    //   ScaffoldMessenger.of(context).showSnackBar(
+                    //     const SnackBar(
+                    //       content: Text('Please specify your diet/lifestyle'),
+                    //       backgroundColor: Colors.red,
+                    //     ),
+                    //   );
+                    //   return;
+                    // }
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const MenstrualCycleDetailsPage()),

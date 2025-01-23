@@ -188,29 +188,29 @@ class _FertilityAndProductUsagePageState
                 alignment: Alignment.center,
                 child: ElevatedButton(
                   onPressed: () {
-                    if (trackOvulation &&
-                        ovulationMethod == 'Other' &&
-                        otherOvulationController.text.trim().isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                              'Please specify your "Other" ovulation method'),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-                      return;
-                    }
-                    if (selectedProducts[4] &&
-                        otherProductController.text.trim().isEmpty) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text(
-                              'Please specify your "Other" menstrual product'),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-                      return;
-                    }
+                    // if (trackOvulation &&
+                    //     ovulationMethod == 'Other' &&
+                    //     otherOvulationController.text.trim().isEmpty) {
+                    //   ScaffoldMessenger.of(context).showSnackBar(
+                    //     const SnackBar(
+                    //       content: Text(
+                    //           'Please specify your "Other" ovulation method'),
+                    //       backgroundColor: Colors.red,
+                    //     ),
+                    //   );
+                    //   return;
+                    // }
+                    // if (selectedProducts[4] &&
+                    //     otherProductController.text.trim().isEmpty) {
+                    //   ScaffoldMessenger.of(context).showSnackBar(
+                    //     const SnackBar(
+                    //       content: Text(
+                    //           'Please specify your "Other" menstrual product'),
+                    //       backgroundColor: Colors.red,
+                    //     ),
+                    //   );
+                    //   return;
+                    // }
                     Navigator.push(
                       context,
                       MaterialPageRoute(

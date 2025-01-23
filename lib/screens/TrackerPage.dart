@@ -64,56 +64,38 @@ class _TrackerPageState extends State<TrackerPage> {
             children: [
               // Custom app bar with gradient background
               Container(
-                padding: EdgeInsets.only(
-                  top: MediaQuery.of(context).padding.top,
-                  bottom: 0,
-                  left: 20,
-                  right: 20,
-                ),
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: [
-                      Colors.green[100]!,
-                      Colors.green[50]!,
-                    ],
-                  ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          'VH',
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.green[800],
-                          ),
-                        ),
-                        const Spacer(),
-                        IconButton(
-                          icon: const Icon(Icons.notifications_none),
-                          onPressed: () {
-                            // Placeholder for notification button
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 10),
-                    Text(
-                      'Hi Y!',
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.green[800],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+  padding: EdgeInsets.only(
+    top: MediaQuery.of(context).padding.top,
+    bottom: 0,
+    left: 20,
+    right: 20,
+  ),
+  decoration: BoxDecoration(
+    color: Colors.green[100]!,
+  ),
+  child: Column(
+    crossAxisAlignment: CrossAxisAlignment.center,
+    children: [
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const SizedBox(width: 40), // Balance with notification icon width
+          ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.asset('assets/logo.png', height: 52),
+          ),
+          IconButton(
+            icon: const Icon(Icons.notifications_none),
+            onPressed: () {
+              // Placeholder for notification button
+            },
+          ),
+        ],
+      ),
+      const SizedBox(height: 10),
+    ],
+  ),
+),
 
               Expanded(
                 child: SingleChildScrollView(
@@ -178,7 +160,6 @@ class _TrackerPageState extends State<TrackerPage> {
                                 ),
                               ],
                             ),
-                            const SizedBox(height: 20),
 
                             // Calendar Grid
                             _buildCalendarGrid(),

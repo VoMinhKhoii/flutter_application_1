@@ -162,18 +162,18 @@ class _CycleHistoryPageState extends State<CycleHistoryPage> {
                 alignment: Alignment.center,
                 child: ElevatedButton(
                   onPressed: () {
-                    if (selectedDate == null ||
-                        selectedPeriodLength == null ||
-                        selectedCycleLength == null ||
-                        selectedRegularity == null) {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Please fill in all fields'),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-                      return;
-                    }
+                    // if (selectedDate == null ||
+                    //     selectedPeriodLength == null ||
+                    //     selectedCycleLength == null ||
+                    //     selectedRegularity == null) {
+                    //   ScaffoldMessenger.of(context).showSnackBar(
+                    //     const SnackBar(
+                    //       content: Text('Please fill in all fields'),
+                    //       backgroundColor: Colors.red,
+                    //     ),
+                    //   );
+                    //   return;
+                    // }
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => const LifestyleSymptomsPage()),

@@ -13,7 +13,7 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage>{
 
   final openAI = OpenAI.instance.build(token: OPENAI_API_KEY, 
-                                      baseOption: HttpSetup(receiveTimeout: const Duration(seconds: 5)), enableLog: true);
+                                      baseOption: HttpSetup(receiveTimeout: const Duration(seconds: 20)), enableLog: true);
 
 
   final ChatUser currentUser = ChatUser(id: '1', firstName: 'User');

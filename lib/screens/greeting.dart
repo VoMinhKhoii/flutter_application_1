@@ -24,22 +24,11 @@ class GreetingPage extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               // App logo or illustration
-              CircleAvatar(
-                radius: 80,
-                backgroundColor: Colors.white,
-                child: Icon(Icons.health_and_safety, size: 80, color: Colors.teal),
-              ),
-              SizedBox(height: 20),
-              // App title
-              Text(
-                'VnHOPE',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.teal[800],
-                ),
-              ),
-              SizedBox(height: 8),
+              ClipRRect(
+            borderRadius: BorderRadius.circular(8),
+            child: Image.asset('assets/logo.png', height: 140),
+          ),
+              SizedBox(height: 28),
               // App tagline
               Text(
                 'Empowering Women\'s Health',

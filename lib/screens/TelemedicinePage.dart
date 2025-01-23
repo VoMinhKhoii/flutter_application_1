@@ -52,7 +52,7 @@ class _TelemedicinePageState extends State<TelemedicinePage> {
         title: const Text('Telemedicine',
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white)),
         centerTitle: true,
-        backgroundColor: Colors.green[800],
+        backgroundColor: Colors.green[100],
       ),
       body: Column(
         children: [
