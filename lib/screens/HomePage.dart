@@ -1,31 +1,55 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1/ai_chat/ChatPage.dart';
+import 'package:flutter_application_1/screens/TrackerPage.dart';
+import 'package:flutter_application_1/screens/TelemedicinePage.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'EducationalContentBox.dart';
 
 
-void main() {
-  runApp(const VnHopeApp());
-}
-
-class VnHopeApp extends StatelessWidget {
-  const VnHopeApp({Key? key}) : super(key: key);
+class HomePage extends StatefulWidget {
+  const HomePage({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'VnHOPE',
-      theme: ThemeData(
-        primaryColor: Color(0xFF90EE90),
-        scaffoldBackgroundColor: Colors.white,
-        fontFamily: 'SF Pro Display',
-      ),
-      home: const HomePage(),
-    );
-  }
+  _HomePageState createState() => _HomePageState();
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+
+
+    void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+    
+    // Navigate based on index
+    switch(index) {
+      case 0: // Home
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => HomePage()),
+        // );
+        break;
+      case 1: // Tracker
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => TrackerPage()),
+        );
+        break;
+      case 2: // Medical
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => TelemedicinePage()),
+        );
+        break;
+      case 3: // Profile
+        // Navigator.push(
+        //   context,
+        //   MaterialPageRoute(builder: (context) => ProfilePage()),
+        // );
+        // break;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -147,63 +171,133 @@ class HomePage extends StatelessWidget {
               ),
             ),
 
-            Spacer(),
-
-            // Bottom Navigation Bar
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 16),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 8,
-                    offset: Offset(0, -2),
+                      Spacer(),
+                    ],
                   ),
-                ],
+                ),
+                floatingActionButton: FloatingActionButton(
+                  backgroundColor: Colors.blue[100],
+                  elevation: 4,
+                  child: const Icon(Icons.chat_outlined, color: Colors.blue, size: 28),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ChatPage()),
+                    );
+                  },
+                ),
+                floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+                bottomNavigationBar: BottomAppBar(
+                  shape: const CircularNotchedRectangle(),
+                  notchMargin: 8,
+                  color: Colors.white,
+                  child: SizedBox(
+                    height: 60,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        _buildNavItem(Icons.home_filled, 'Home', Colors.green[800]!, 0),
+                        _buildNavItem(Icons.calendar_month_outlined, 'Tracker', Colors.grey, 1),
+                        const SizedBox(width: 40),
+                        _buildNavItem(Icons.medical_services_outlined, 'Medical', Colors.grey, 2),
+                        _buildNavItem(Icons.account_circle, 'Profile', Colors.grey, 3),
+                      ],
+                    ),
+                  ),
+                ),
+              );
+            }
+
+//             // Bottom Navigation Bar
+//             Container(
+//               padding: EdgeInsets.symmetric(vertical: 16),
+//               decoration: BoxDecoration(
+//                 color: Colors.white,
+//                 boxShadow: [
+//                   BoxShadow(
+//                     color: Colors.black.withOpacity(0.05),
+//                     blurRadius: 8,
+//                     offset: Offset(0, -2),
+//                   ),
+//                 ],
+//               ),
+//               child: Row(
+//                 mainAxisAlignment: MainAxisAlignment.spaceAround,
+//                 children: [
+//                   _buildNavItem(Icons.home_rounded, 'Home', true),
+//                   _buildNavItem(Icons.calendar_today_rounded, 'Period tracker', false),
+//                   _buildNavItem(Icons.video_call_rounded, 'Telemedicine', false),
+//                   _buildNavItem(Icons.person_rounded, 'Profile', false),
+//                 ],
+//               ),
+//             ),
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+
+//   Widget _buildNavItem(IconData icon, String label, bool isSelected) {
+//     return Column(
+//       mainAxisSize: MainAxisSize.min,
+//       children: [
+//         Container(
+//           padding: EdgeInsets.all(12),
+//           decoration: BoxDecoration(
+//             color: isSelected ? Color(0xFF90EE90).withOpacity(0.2) : Colors.transparent,
+//             borderRadius: BorderRadius.circular(12),
+//           ),
+//           child: Icon(
+//             icon,
+//             color: isSelected ? Color(0xFF2C3E50) : Color(0xFF95A5A6),
+//             size: 24,
+//           ),
+//         ),
+//         SizedBox(height: 4),
+//         Text(
+//           label,
+//           style: TextStyle(
+//             fontSize: 12,
+//             fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
+//             color: isSelected ? Color(0xFF2C3E50) : Color(0xFF95A5A6),
+//           ),
+//         ),
+//       ],
+//     );
+//   }
+// }
+
+  Widget _buildNavItem(IconData icon, String label, Color color, int index) {
+    return Expanded(
+      child: InkWell(
+        onTap: () => _onItemTapped(index),
+        child: SizedBox(
+          height: 56,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                color: _selectedIndex == index ? Colors.green[800] : color,
+                size: 24,
               ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  _buildNavItem(Icons.home_rounded, 'Home', true),
-                  _buildNavItem(Icons.calendar_today_rounded, 'Period tracker', false),
-                  _buildNavItem(Icons.video_call_rounded, 'Telemedicine', false),
-                  _buildNavItem(Icons.person_rounded, 'Profile', false),
-                ],
+              const SizedBox(height: 4),
+              Text(
+                label,
+                style: TextStyle(
+                  color: _selectedIndex == index ? Colors.green[800] : color,
+                  fontSize: 11,
+                  height: 1.0,
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-    );
-  }
-
-  Widget _buildNavItem(IconData icon, String label, bool isSelected) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Container(
-          padding: EdgeInsets.all(12),
-          decoration: BoxDecoration(
-            color: isSelected ? Color(0xFF90EE90).withOpacity(0.2) : Colors.transparent,
-            borderRadius: BorderRadius.circular(12),
-          ),
-          child: Icon(
-            icon,
-            color: isSelected ? Color(0xFF2C3E50) : Color(0xFF95A5A6),
-            size: 24,
-          ),
-        ),
-        SizedBox(height: 4),
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 12,
-            fontWeight: isSelected ? FontWeight.w600 : FontWeight.normal,
-            color: isSelected ? Color(0xFF2C3E50) : Color(0xFF95A5A6),
-          ),
-        ),
-      ],
     );
   }
 }

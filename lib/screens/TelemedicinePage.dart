@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1/ai_chat/ChatPage.dart';
+import 'package:flutter_application_1/screens/TrackerPage.dart';
 import 'package:flutter_application_1/screens/HomePage.dart';
 
 class TelemedicinePage extends StatefulWidget {
@@ -24,15 +25,15 @@ class _TelemedicinePageState extends State<TelemedicinePage> {
         );
         break;
       case 1: // Tracker
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(builder: (context) => TrackerPage()),
-        // );
-        // break;
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => TrackerPage()),
+        );
+        break;
       case 2: // Medical
         // Navigator.push(
         //   context,
-        //   MaterialPageRoute(builder: (context) => MedicalPage()),
+        //   MaterialPageRoute(builder: (context) => TelemedicinePage()),
         // );
         // break;
       case 3: // Profile
@@ -108,10 +109,10 @@ class _TelemedicinePageState extends State<TelemedicinePage> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              _buildNavItem(Icons.home_filled, 'Home', Colors.green[800]!, 0),
+              _buildNavItem(Icons.home_filled, 'Home', Colors.grey!, 0),
               _buildNavItem(Icons.calendar_month_outlined, 'Tracker', Colors.grey, 1),
               const SizedBox(width: 40),
-              _buildNavItem(Icons.medical_services_outlined, 'Medical', Colors.grey, 2),
+              _buildNavItem(Icons.medical_services_outlined, 'Telemedicine', Colors.green[800]!, 2),
               _buildNavItem(Icons.account_circle, 'Profile', Colors.grey, 3),
             ],
           ),
